@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/reset.css">\
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>BWang's Weather App</title>
+</head>
+
+<body>
+  <header>
+    <h1>Weather Dashboard</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Search for a City: </h2>
+      <input type="text" name="city" id="cityInput">
+    </section>
+    <section>
+      <section>
+        <h2 id="cityName"></h2>
+        <p>Temp: <span id="cityTempCur"></span></p>
+        <p>Wind: <span id="cityWindCur"></span></p>
+        <p>Humidity <span id="cityHumidityCur"></span></p>
+      </section>
+      <section>
+        <h3>5-Day Forecast: </h3>
+        <section class="dateCard" id="day1Card">
+          <h4 id="day1"></h4>
+          <img src="" alt="">
+          <p>Temp: <span id="cityTemp1"></span></p>
+          <p>Wind: <span id="cityWind1"></span></p>
+          <p>Humidity <span id="cityHumidity1"></span></p>
+        </section>
+        <section class="dateCard" id="day2Card">
+          <h4 id="day2"></h4>
+          <img src="" alt="">
+          <p>Temp: <span id="cityTemp2"></span></p>
+          <p>Wind: <span id="cityWind2"></span></p>
+          <p>Humidity <span id="cityHumidity2"></span></p>
+        </section>
+        <section class="dateCard" id="day3Card">
+          <h4 id="day3"></h4>
+          <img src="" alt="">
+          <p>Temp: <span id="cityTemp3"></span></p>
+          <p>Wind: <span id="cityWind3"></span></p>
+          <p>Humidity <span id="cityHumidity3"></span></p>
+        </section>
+        <section class="dateCard" id="day4Card">
+          <h4 id="day4"></h4>
+          <img src="" alt="">
+          <p>Temp: <span id="cityTemp4"></span></p>
+          <p>Wind: <span id="cityWind4"></span></p>
+          <p>Humidity <span id="cityHumidity4"></span></p>
+        </section>
+        <section class="dateCard" id="day5Card">
+          <h4 id="day5"></h4>
+          <img src="" alt="">
+          <p>Temp: <span id="cityTemp5"></span></p>
+          <p>Wind: <span id="cityWind5"></span></p>
+          <p>Humidity <span id="cityHumidity5"></span></p>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
