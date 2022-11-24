@@ -13,15 +13,17 @@
 </head>
 
 <body>
-  <header>
+  <header class="bg-success text-white">
     <h1>Weather Dashboard</h1>
   </header>
   <main class="container">
     <div class="row">
-      <section class="col-2">
+      <section class="col-3 search">
         <h2>Search for a City: </h2>
         <input type="text" name="city" id="cityInput">
         <button id="searchBtn">Search</button>
+
+        <!-- This is a function that will be worked on later. -->
         <!-- <h3>What type of units would you like to see?</h3>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -35,44 +37,47 @@
           </div>
         </div> -->
       </section>
-      <section class="col-10">
-        <section class="row">
-          <h2 id="cityName">City</h2>
+      <section class="col-9">
+        <section class="row bg-info bg-gradient">
+          <div id="nameDate">
+            <h2 id="cityName">City </h2>
+            <h2 id="cityDate">Date</h2>
+          </div>
           <p>Temp: <span id="cityTempCur"></span></p>
           <p>Wind: <span id="cityWindCur"></span></p>
           <p>Humidity: <span id="cityHumCur"></span></p>
         </section>
-        <section class="row">
+        <section class="row dateCardRow">
           <h3>5-Day Forecast: </h3>
-          <section class="dateCard col-2" id="day1Card">
+          <section class="dateCard bg-primary text-white col-2" bg-primary id="day1Card">
             <h4 id="day1"></h4>
             <img src="" alt="">
             <p>Temp: <span id="cityTemp1"></span></p>
             <p>Wind: <span id="cityWind1"></span></p>
             <p>Humidity <span id="cityHumidity1"></span></p>
           </section>
-          <section class="dateCard col-2" id="day2Card">
+          <section class="dateCard bg-primary text-white col-2" id="day2Card">
             <h4 id="day2"></h4>
             <img src="" alt="">
             <p>Temp: <span id="cityTemp2"></span></p>
             <p>Wind: <span id="cityWind2"></span></p>
             <p>Humidity <span id="cityHumidity2"></span></p>
           </section>
-          <section class="dateCard col-2" id="day3Card">
+          <section class="dateCard bg-primary text-white col-2" id="day3Card">
             <h4 id="day3"></h4>
             <img src="" alt="">
             <p>Temp: <span id="cityTemp3"></span></p>
             <p>Wind: <span id="cityWind3"></span></p>
             <p>Humidity <span id="cityHumidity3"></span></p>
           </section>
-          <section class="dateCard col-2" id="day4Card">
+          <section class="dateCard bg-primary text-white col-2" id="day4Card">
             <h4 id="day4"></h4>
             <img src="" alt="">
             <p>Temp: <span id="cityTemp4"></span></p>
             <p>Wind: <span id="cityWind4"></span></p>
             <p>Humidity <span id="cityHumidity4"></span></p>
           </section>
-          <section class="dateCard col-2" id="day5Card">
+          <section class="dateCard bg-primary text-white col-2" id="day5Card">
             <h4 id="day5"></h4>
             <img src="" alt="">
             <p>Temp: <span id="cityTemp5"></span></p>

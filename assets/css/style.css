@@ -1,0 +1,31 @@
+.dateCardRow {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#nameDate {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+}
+
+h1 {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.search {
+  margin: auto auto;
+}
+
+h3 {
+  text-align: center;
+}
+
+h4 {
+  font-size: 20px;
+}
