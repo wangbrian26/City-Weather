@@ -17,14 +17,15 @@
     <h1>Weather Dashboard</h1>
   </header>
   <main class="container">
-    <div class="row">
-      <section class="col-3 search">
-        <h2>Search for a City: </h2>
-        <input type="text" name="city" id="cityInput">
-        <button id="searchBtn">Search</button>
+    <div class="row align-items-start">
+      <section class="col-3 align-self-start search container">
+        <div class="row">
+          <h2>Search for a City: </h2>
+          <input type="text" name="city" id="cityInput">
+          <button id="searchBtn">Search</button>
 
-        <!-- This is a function that will be worked on later. -->
-        <!-- <h3>What type of units would you like to see?</h3>
+          <!-- This is a function that will be worked on later. -->
+          <!-- <h3>What type of units would you like to see?</h3>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -36,18 +37,21 @@
             <a class="dropdown-item" href="#">Imperial</a>
           </div>
         </div> -->
+          <div id="searchHistory">
+          </div>
+        </div>
       </section>
-      <section class="col-9">
+      <section class="col-8 align-self-end container-fluid">
         <section class="row bg-info bg-gradient">
-          <div id="nameDate">
-            <h2 id="cityName">City </h2>
-            <h2 id="cityDate">Date</h2>
+          <div class="row" id="nameDate">
+            <h2 class="col-6" id="cityName">City </h2>
+            <h2 class="col-6" id="cityDate">Date</h2>
           </div>
           <p>Temp: <span id="cityTempCur"></span></p>
           <p>Wind: <span id="cityWindCur"></span></p>
           <p>Humidity: <span id="cityHumCur"></span></p>
         </section>
-        <section class="row dateCardRow">
+        <section class="row justify-content-between">
           <h3>5-Day Forecast: </h3>
           <section class="dateCard bg-primary text-white col-2" bg-primary id="day1Card">
             <h4 id="day1"></h4>

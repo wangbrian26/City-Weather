@@ -1,16 +1,19 @@
 var searchBtn = $("#searchBtn");
 var dropDownMenu = document.querySelector(".dropdown-item");
 
-//gets Geo API based on city search, then takes the coordinates to find the weather information
 
+//gets Geo API based on city search, then takes the coordinates to find the weather information
 function getCity() {
-  var cityName = $("#cityInput");
+  var cityName = document.querySelector("#cityInput")
   var cityNameSearch = cityName.val();
   cityNameSearch = cityNameSearch.toLowerCase();
   cityNameSearch = cityNameSearch.replace(" ", "_");
+  document.querySelector("#searchHistory").appendChild = `<button class="prevSearchButton" id="${cityName}">${cityName}</button>`
+}
+
+function findCityInfo(cityNameSearch) {
   var geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
   var dropDownBtn = document.querySelector("#dropdownMenuButton");
-
   fetch(geoAPI)
     .then(function (response) {
       if (response.status != 200) {
@@ -31,7 +34,7 @@ function getCity() {
         })
         .then(function (data) {
           console.log(data);
-          $("#cityName").text(data.name);
+          document.querySelector("#cityName").textContent = `${data.name}`;
           var cityTempCur = $("#cityTempCur");
           cityTempCur.text(data.main.temp + " \u00B0F");
           var cityWindCur = $("#cityWindCur");
@@ -46,14 +49,19 @@ function getCity() {
         })
         .then(function (data) {
           console.log(data);
-          var curDate = data.list[0].dt_txt;
+          var curDate = data.list[5].dt_txt;
           curDate = curDate.split(" ");
           curDate = curDate[0];
+          curDate = curDate.split("-")
+          curDate = curDate[1] + "/" + (curDate[2].parseInt()-1).toString() + "/" + curDate[0]
+          console.log(typeof(curDate[2]))
           console.log(curDate);
           document.querySelector("#cityDate").textContent = `${curDate}`;
           var day1Date = data.list[5].dt_txt;
           day1Date = day1Date.split(" ");
           day1Date = day1Date[0];
+          day1Date = day1Date.split("-")
+          day1Date = day1Date[1] + "/" + day1Date[2] + "/" + day1Date[0]
           document.querySelector("#day1").textContent = `${day1Date}`;
           var day1Temp = data.list[5].main.temp;
           document.querySelector(
@@ -66,6 +74,8 @@ function getCity() {
           var day2Date = data.list[13].dt_txt;
           day2Date = day2Date.split(" ");
           day2Date = day2Date[0];
+          day2Date = day2Date.split("-")
+          day2Date = day2Date[1] + "/" + day2Date[2] + "/" + day2Date[0]
           document.querySelector("#day2").textContent = `${day2Date}`;
           var day2Temp = data.list[13].main.temp;
           document.querySelector(
@@ -78,6 +88,8 @@ function getCity() {
           var day3Date = data.list[21].dt_txt;
           day3Date = day3Date.split(" ");
           day3Date = day3Date[0];
+          day3Date = day3Date.split("-")
+          day3Date = day3Date[1] + "/" + day3Date[2] + "/" + day3Date[0]
           document.querySelector("#day3").textContent = `${day3Date}`;
           var day3Temp = data.list[21].main.temp;
           document.querySelector(
@@ -90,6 +102,8 @@ function getCity() {
           var day4Date = data.list[29].dt_txt;
           day4Date = day4Date.split(" ");
           day4Date = day4Date[0];
+          day4Date = day4Date.split("-")
+          day4Date = day4Date[1] + "/" + day4Date[2] + "/" + day4Date[0]
           document.querySelector("#day4").textContent = `${day4Date}`;
           var day4Temp = data.list[29].main.temp;
           document.querySelector(
@@ -102,6 +116,8 @@ function getCity() {
           var day5Date = data.list[37].dt_txt;
           day5Date = day5Date.split(" ");
           day5Date = day5Date[0];
+          day5Date = day5Date.split("-")
+          day5Date = day5Date[1] + "/" + day5Date[2] + "/" + day5Date[0]
           document.querySelector("#day5").textContent = `${day5Date}`;
           var day5Temp = data.list[37].main.temp;
           document.querySelector(
@@ -115,6 +131,10 @@ function getCity() {
     });
 }
 
+function prevSearch() {
+  var prevCityName = event.target.id
+  findCityInfo(prevCityName)
+}
 // function chooseInputType() {
 //   $("#typeInput a").click(function () {
 //     dropDownBtn.textContent = this.value;
@@ -122,4 +142,5 @@ function getCity() {
 //   });
 // }
 searchBtn.on("click", getCity);
+document.querySelector(".prevSearchButton").addEventListener("click", prevSearch)
 // dropDownMenu.addEventListener("click", chooseInputType);

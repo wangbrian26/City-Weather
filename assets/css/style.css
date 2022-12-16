@@ -1,26 +1,26 @@
-.dateCardRow {
+/* .dateCardRow {
   display: flex;
   justify-content: space-evenly;
 }
 
-#nameDate {
+/* #nameDate {
   display: flex;
   justify-content: space-evenly;
-}
+} */
 
-body {
+/* body {
   margin: 0;
   width: 100%;
-}
+} */
 
 h1 {
   padding: 20px;
   margin-bottom: 20px;
 }
 
-.search {
+/*  .search {
   margin: auto auto;
-}
+} */
 
 h3 {
   text-align: center;
