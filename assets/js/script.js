@@ -9,8 +9,9 @@ function getCity() {
   cityNameSearch = cityNameSearch.toLowerCase();
   cityNameSearch = cityNameSearch.replace(" ", "_");
   var geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
-  var dropDownBtn = document.querySelector("#dropdownMenuButton");
+  var dropDownBtn = document.querySelector("#dropdownMenuButton").value;
 
+  console.log(dropDownBtn);
   fetch(geoAPI)
     .then(function (response) {
       if (response.status != 200) {
