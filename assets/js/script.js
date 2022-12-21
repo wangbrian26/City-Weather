@@ -12,7 +12,11 @@ function getCity(city) {
   if (!history.includes(cityName)) {
     history.push(cityName);
   }
-  if (document.querySelector(".units").value != "imperial") {
+  if (
+    document.querySelector(".units").value != "imperial" &&
+    document.querySelector(".units").value != "metric" &&
+    document.querySelector(".units").value != "standard"
+  ) {
     window.alert(
       "Please pick a type of unit you would like to see information displayed in."
     );
@@ -78,7 +82,7 @@ function findCityInfo(cityNameSearch) {
               break;
             case "imperial":
               document.querySelector(
-                "#cityCur"
+                "#cityTempCur"
               ).textContent = `${data.main.temp} \u00b0F`;
               document.querySelector(
                 "#cityWindCur"
@@ -86,7 +90,7 @@ function findCityInfo(cityNameSearch) {
               break;
             case "standard":
               document.querySelector(
-                "#cityCur"
+                "#cityTempCur"
               ).textContent = `${data.main.temp} K`;
               document.querySelector(
                 "#cityWindCur"
