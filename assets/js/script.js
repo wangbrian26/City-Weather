@@ -43,7 +43,7 @@ function displayHistory() {
 // Gets geo information from the searched city and passes that into the API to get all weather info
 
 function findCityInfo(cityNameSearch) {
-  var geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
+  var geoAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
   fetch(geoAPI)
     .then(function (response) {
       if (response.status != 200) {
@@ -66,7 +66,7 @@ function findCityInfo(cityNameSearch) {
           document.querySelector("#cityName").textContent = `${data.name}`;
           document.querySelector(
             "#cityPic"
-          ).src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+          ).src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
           switch (units) {
             case "metric":
               document.querySelector(
@@ -130,7 +130,7 @@ function findCityInfo(cityNameSearch) {
             var dayIcon = data.list[i].weather[0].icon;
             document.querySelector(
               `#cityPic${dayNum}`
-            ).src = `http://openweathermap.org/img/wn/${dayIcon}.png`;
+            ).src = `https://openweathermap.org/img/wn/${dayIcon}.png`;
             switch (units) {
               case "metric":
                 document.querySelector(
