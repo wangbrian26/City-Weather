@@ -1,17 +1,49 @@
-var searchBtn = $("#searchBtn");
-var dropDownMenu = document.querySelector(".dropdown-item");
+var searchBtn = document.querySelector("#searchBtn");
 
-//gets Geo API based on city search, then takes the coordinates to find the weather information
+// Takes the name of the input and makes two variables, cityName which is the display and cityNameSearch which is what is put into the search
+// Creates an array in localStorage called cities or gets the array cities and pushes in the cityName if it does not exist inside array
+// If the units are not selected, we stop the function and alert the user to pick a valid unit
 
-function getCity() {
-  var cityName = $("#cityInput");
-  var cityNameSearch = cityName.val();
-  cityNameSearch = cityNameSearch.toLowerCase();
+function getCity(city) {
+  var cityName = city || document.querySelector("#cityInput").value;
+  var cityNameSearch = cityName.toLowerCase();
   cityNameSearch = cityNameSearch.replace(" ", "_");
-  var geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
-  var dropDownBtn = document.querySelector("#dropdownMenuButton").value;
+  var history = JSON.parse(localStorage.getItem("cities")) || [];
+  if (!history.includes(cityName)) {
+    history.push(cityName);
+  }
+  if (document.querySelector(".units").value != "imperial") {
+    window.alert(
+      "Please pick a type of unit you would like to see information displayed in."
+    );
+    return;
+  }
+  localStorage.setItem("cities", JSON.stringify(history));
+  displayHistory();
+  findCityInfo(cityNameSearch);
+}
 
-  console.log(dropDownBtn);
+// Allows us to create a button for each previously searched city
+function displayHistory() {
+  var history = JSON.parse(localStorage.getItem("cities")) || [];
+  document.querySelector("#searchHistory").innerHTML = "";
+  for (var i = 0; i < history.length; i++) {
+    var cityEl = document.createElement("button");
+    cityEl.innerText = history[i];
+    cityEl.classList.add(
+      "row",
+      "col-8",
+      "justify-content-center",
+      "cityButtons"
+    );
+    document.querySelector("#searchHistory").appendChild(cityEl);
+  }
+}
+
+// Gets geo information from the searched city and passes that into the API to get all weather info
+
+function findCityInfo(cityNameSearch) {
+  var geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityNameSearch}&appid=1560a07c19638ebfb003c32577cdfee1`;
   fetch(geoAPI)
     .then(function (response) {
       if (response.status != 200) {
@@ -23,104 +55,127 @@ function getCity() {
       console.log(data);
       var lat = data[0].lat;
       var lon = data[0].lon;
-
-      var typeInput = $("#typeInput").val();
-      var curWeatherAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1560a07c19638ebfb003c32577cdfee1&units=imperial`;
+      var units = document.querySelector(".units").value;
+      var curWeatherAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1560a07c19638ebfb003c32577cdfee1&units=${units}`;
       fetch(curWeatherAPI)
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
           console.log(data);
-          $("#cityName").text(data.name);
-          var cityTempCur = $("#cityTempCur");
-          cityTempCur.text(data.main.temp + " \u00B0F");
-          var cityWindCur = $("#cityWindCur");
-          cityWindCur.text(data.wind.speed + " mph");
-          var cityHumCur = $("#cityHumCur");
-          cityHumCur.text(data.main.humidity + " %");
+          document.querySelector("#cityName").textContent = `${data.name}`;
+          document.querySelector(
+            "#cityPic"
+          ).src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+          switch (units) {
+            case "metric":
+              document.querySelector(
+                "#cityTempCur"
+              ).textContent = `${data.main.temp} \u00b0C`;
+              document.querySelector(
+                "#cityWindCur"
+              ).textContent = `${data.wind.speed} meters/sec`;
+              break;
+            case "imperial":
+              document.querySelector(
+                "#cityCur"
+              ).textContent = `${data.main.temp} \u00b0F`;
+              document.querySelector(
+                "#cityWindCur"
+              ).textContent = `${data.wind.speed} mph`;
+              break;
+            case "standard":
+              document.querySelector(
+                "#cityCur"
+              ).textContent = `${data.main.temp} K`;
+              document.querySelector(
+                "#cityWindCur"
+              ).textContent = `${data.wind.speed} meters/sec`;
+              break;
+          }
+          document.querySelector(
+            "#cityHumCur"
+          ).textContent = `${data.main.humidity} %`;
         });
-      var forecastAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1560a07c19638ebfb003c32577cdfee1&units=imperial`;
+      var forecastAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=1560a07c19638ebfb003c32577cdfee1&units=${units}`;
       fetch(forecastAPI)
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
           console.log(data);
-          var curDate = data.list[0].dt_txt;
+          var curDate = data.list[5].dt_txt;
           curDate = curDate.split(" ");
           curDate = curDate[0];
+          curDate = curDate.split("-");
+          curDate =
+            curDate[1] +
+            "/" +
+            (parseInt(curDate[2]) - 1).toString() +
+            "/" +
+            curDate[0];
+          console.log(typeof curDate[2]);
           console.log(curDate);
           document.querySelector("#cityDate").textContent = `${curDate}`;
-          var day1Date = data.list[5].dt_txt;
-          day1Date = day1Date.split(" ");
-          day1Date = day1Date[0];
-          document.querySelector("#day1").textContent = `${day1Date}`;
-          var day1Temp = data.list[5].main.temp;
-          document.querySelector(
-            "#cityTemp1"
-          ).textContent = `${day1Temp} \u00b0F`;
-          var day1Wind = data.list[5].wind.speed;
-          document.querySelector("#cityWind1").textContent = `${day1Wind} mph`;
-          var day1Hum = data.list[5].main.humidity;
-          document.querySelector("#cityHumidity1").textContent = `${day1Hum} %`;
-          var day2Date = data.list[13].dt_txt;
-          day2Date = day2Date.split(" ");
-          day2Date = day2Date[0];
-          document.querySelector("#day2").textContent = `${day2Date}`;
-          var day2Temp = data.list[13].main.temp;
-          document.querySelector(
-            "#cityTemp2"
-          ).textContent = `${day2Temp} \u00b0F`;
-          var day2Wind = data.list[13].wind.speed;
-          document.querySelector("#cityWind2").textContent = `${day2Wind} mph`;
-          var day2Hum = data.list[13].main.humidity;
-          document.querySelector("#cityHumidity2").textContent = `${day2Hum} %`;
-          var day3Date = data.list[21].dt_txt;
-          day3Date = day3Date.split(" ");
-          day3Date = day3Date[0];
-          document.querySelector("#day3").textContent = `${day3Date}`;
-          var day3Temp = data.list[21].main.temp;
-          document.querySelector(
-            "#cityTemp3"
-          ).textContent = `${day3Temp} \u00b0F`;
-          var day3Wind = data.list[21].wind.speed;
-          document.querySelector("#cityWind3").textContent = `${day3Wind} mph`;
-          var day3Hum = data.list[21].main.humidity;
-          document.querySelector("#cityHumidity3").textContent = `${day3Hum} %`;
-          var day4Date = data.list[29].dt_txt;
-          day4Date = day4Date.split(" ");
-          day4Date = day4Date[0];
-          document.querySelector("#day4").textContent = `${day4Date}`;
-          var day4Temp = data.list[29].main.temp;
-          document.querySelector(
-            "#cityTemp4"
-          ).textContent = `${day4Temp} \u00b0F`;
-          var day4Wind = data.list[29].wind.speed;
-          document.querySelector("#cityWind4").textContent = `${day4Wind} mph`;
-          var day4Hum = data.list[29].main.humidity;
-          document.querySelector("#cityHumidity4").textContent = `${day4Hum} %`;
-          var day5Date = data.list[37].dt_txt;
-          day5Date = day5Date.split(" ");
-          day5Date = day5Date[0];
-          document.querySelector("#day5").textContent = `${day5Date}`;
-          var day5Temp = data.list[37].main.temp;
-          document.querySelector(
-            "#cityTemp5"
-          ).textContent = `${day5Temp} \u00b0F`;
-          var day5Wind = data.list[37].wind.speed;
-          document.querySelector("#cityWind5").textContent = `${day5Wind} mph`;
-          var day5Hum = data.list[37].main.humidity;
-          document.querySelector("#cityHumidity5").textContent = `${day5Hum} %`;
+          var dayNum = 1;
+          for (var i = 5; i < 38; i += 8) {
+            var dayDate = data.list[i].dt_txt;
+            dayDate = dayDate.split(" ");
+            dayDate = dayDate[0];
+            dayDate = dayDate.split("-");
+            dayDate = dayDate[1] + "/" + dayDate[2] + "/" + dayDate[0];
+            document.querySelector(`#day${dayNum}`).textContent = `${dayDate}`;
+            var dayTemp = data.list[i].main.temp;
+            var dayWind = data.list[i].wind.speed;
+            var dayIcon = data.list[i].weather[0].icon;
+            document.querySelector(
+              `#cityPic${dayNum}`
+            ).src = `http://openweathermap.org/img/wn/${dayIcon}.png`;
+            switch (units) {
+              case "metric":
+                document.querySelector(
+                  `#cityTemp${dayNum}`
+                ).textContent = `${dayTemp} \u00b0C`;
+                document.querySelector(
+                  `#cityWind${dayNum}`
+                ).textContent = `${dayWind} meters/sec`;
+                break;
+              case "imperial":
+                document.querySelector(
+                  `#cityTemp${dayNum}`
+                ).textContent = `${dayTemp} \u00b0F`;
+                document.querySelector(
+                  `#cityWind${dayNum}`
+                ).textContent = `${dayWind} mph`;
+                break;
+              case "standard":
+                document.querySelector(
+                  `#cityTemp${dayNum}`
+                ).textContent = `${dayTemp} K`;
+                document.querySelector(
+                  `#cityWind${dayNum}`
+                ).textContent = `${dayWind} meters/sec`;
+                break;
+            }
+            var dayHum = data.list[i].main.humidity;
+            document.querySelector(
+              `#cityHumidity${dayNum}`
+            ).textContent = `${dayHum} %`;
+            dayNum++;
+          }
         });
     });
 }
 
-// function chooseInputType() {
-//   $("#typeInput a").click(function () {
-//     dropDownBtn.textContent = this.value;
-//     dropDownBtn.value = this.value;
-//   });
-// }
-searchBtn.on("click", getCity);
-// dropDownMenu.addEventListener("click", chooseInputType);
+// Gets the name of the city on the button that users press to pass into the getCity(city)
+
+function prevSearch(event) {
+  event.stopPropagation();
+  var prevCityName = event.target.innerText;
+  getCity(prevCityName);
+}
+
+displayHistory();
+
+searchBtn.addEventListener("click", () => getCity());
+document.querySelector("#searchHistory").addEventListener("click", prevSearch);
