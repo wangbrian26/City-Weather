@@ -1,51 +1,76 @@
-# City-Weather
+# City Weather 
+
+![MIT](https://img.shields.io/badge/License%3A-MIT-green)
 
 ## Description
 
-This game application was built to allow players to select a fanmade pokemon (also known as fakemon) as their character, set the stats for their character, and go on to defeat as many fusion pokemon as possible to accumulate points.
+This project was created to allow users to easily search the weather of their city of choice. Users will also be able to see their previously searched cities in case they need to find that infromation again. Users can also pick what units of measurements they would like to view with, as some people prefer metric, imperial, or standard.   
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Credits](#credits)
 - [License](#license)
-- [Website](#website)
+- [Contributions](#contributions)
+- [Features](#features)
+- [Tests](#tests)
+- [Questions](#questions)
 
 ## Installation
 
-This game is hosted on GitHub pages and uses user's local storage to store user selection and high scores. There is no installation required.
+There is no installation needed for this application to be used.
 
 ## Usage
 
-To use this application, the player selects one of the three fakemon to be their character and give it a name. On the next page, the player allocates the given 50 stats to health, attack, speed, and/or defense. On the bottom of this screen, users can see the battle interactions and rules listed out for them. Once ready, they can click the "Start Battle" to face off against a series of fusion pokemon. Whoever has the higher speed stat will get to attack first.
+The website is live [City-Weather][https://wangbrian26.github.io/City-Weather/]
 
-The player can choose between 4 battle actions: normal attack, strong attack, evade, and defend. Each action has its own pros and cons. Normal attacks are guaranteed to hit the enemy but deliver only 75% of the attack power. Strong attacks only have a 70% chance of hitting, but deliver 100% of the attack power. As for evasion, the higher the player's speed stat, the more likely they to succeed in evading the enemy's attack. If they do succeed in evading, they will take 0 damage while also recover their health points based on their speed with a cap of 250 health. With every successful evade, users will have a lower chance to evade on their next evade. Last but not least, the higher the player's defense stat, the more likely they are able to successfully defending themselves and reflecting back that mitaged damage to the opponent. When choosing the defend option, the player will always be able to mitigate at least 5 damage but will also at least take 5 damage.
+In order to use this application, please type the name of the city you would like to view information for. Then, select what type of measurement you would like to see. Then press the search button. If you would like to see a previously searched city, please select a unit of measurement, and then press the city you would like to see the information for.
 
-Each time a battle action is selected, the opposing fusion pokemon will deliver (most of the time) normal attacks and (sometimes) strong attacks back. Before every strong attack, there will be a warning so the player can calculate their moves and choose accordingly. After every battle win, another fusion pokemon with different stats will appear to challenge the player. The more fusion pokemon they beat until they run out of health points, the higher score they will get. When the game is over, the player will be able to save their score by submitting their nickname to the high score board. Once they have viewed the high scores, they can choose to play again or clear scores.
+## License 
+MIT
 
-![Screenshot](./assets/images/screenshots/landing-page.png)
-![Screenshot](./assets/images/screenshots/name-input.png)
-![Screenshot](./assets/images/screenshots/stat-page.png)
-![Screenshot](./assets/images/screenshots/battle-page.png)
-![Screenshot](./assets/images/screenshots/game-over.png)
-![Screenshot](./assets/images/screenshots/high-score.png)
+MIT License
 
-## Credits
+Copyright (c) [2022] [Brian Wang]
 
-Thanks to Instructor Quinton Fults, TA Takara Truong, and TA Black Marcus for helping with the learning on these elements. 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Credits to our group members who worked on this project:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Jason Doss - https://github.com/dossj88
-Johnathan Nguyen - https://github.com/jthnguyen9909
-Nicole Trieu - https://github.com/nbtrieu
-Brian Wang - https://github.com/wangbrian26
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+      
+## Contributions
 
-## License
+Brian Wang
 
-N/A
+## Features
 
-## Website
+Here are some of the highlight features of this application: 
 
-https://wangbrian26.github.io/Pokemon-Fusion-Battle-Simulator/
+I want to highlight that users can select the type of units they would like to see all of the information in. This allows all types of users to be able to use this application. Not only that, but the app also allows you to see a little picture of what kind of weather to expect.
+
+## Tests
+
+Here are some tests that you can run to try out the application:
+
+Please type the name of your city with any type of capitalization. 
+
+## Questions
+
+If you have any questions or would like to see any of my other projects, please visit my github: 
+
+[Github][https://github.com/wangbrian26]
+
+Please email me at wangbrian26@gmail.com
