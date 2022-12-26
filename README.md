@@ -61,6 +61,8 @@ Here are some of the highlight features of this application:
 
 I want to highlight that users can select the type of units they would like to see all of the information in. This allows all types of users to be able to use this application. Not only that, but the app also allows you to see a little picture of what kind of weather to expect.
 
+![Screenshot](/assets/images/City-Weather.png)
+
 ## Tests
 
 Here are some tests that you can run to try out the application:
